@@ -43,4 +43,7 @@ dependencies {
     //navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    //viewpager
+    implementation "androidx.viewpager2:viewpager2:$viewPagerVersion"
 }
