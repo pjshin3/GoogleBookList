@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MyGoogleBook</string>
+
+
+
+    <string name="what_you_want">What You Want ?</string>
 </resources>
