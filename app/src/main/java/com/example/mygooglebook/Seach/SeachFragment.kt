@@ -8,17 +8,14 @@ import androidx.fragment.app.Fragment
 import com.example.mygooglebook.databinding.FragmentSearchBinding
 
 class SeachFragment : Fragment(){
-
-    private lateinit var bindig : FragmentSearchBinding
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        bindig =
+        val bindig = FragmentSearchBinding.inflate(inflater,container,false)
 
-        return super.onCreateView(inflater, container, savedInstanceState)
+        return bindig.root
     }
 }

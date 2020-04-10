@@ -1,4 +1,4 @@
-package com.example.mygooglebook
+package com.example.mygooglebook.Home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,10 +17,8 @@ class HomeViewPagetFragmentt : Fragment(){
         val binding = FragmentHomviewpagerBinding.inflate(inflater,container,false)
         val viewpage = binding.viewPager
 
+        viewpage.adapter = HomeViewPagerAdapter(this)
 
-        //TODO LIST
-        //뷰페이저 를 완성해야됨.
-        
         return binding.root
     }
 

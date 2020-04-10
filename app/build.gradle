@@ -46,4 +46,6 @@ dependencies {
 
     //viewpager
     implementation "androidx.viewpager2:viewpager2:$viewPagerVersion"
+    //recylerview
+    implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersion"
 }
