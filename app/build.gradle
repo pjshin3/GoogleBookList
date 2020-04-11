@@ -27,6 +27,11 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 }
 
 dependencies {
@@ -47,5 +52,19 @@ dependencies {
     //viewpager
     implementation "androidx.viewpager2:viewpager2:$viewPagerVersion"
     //recylerview
-    implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersion"
+    implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
+
+    // retrofit2
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit2"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit2"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2"
+
+    //okhttp
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp"
+
+    // koin
+    implementation "org.koin:koin-core:$koin"
+    implementation "org.koin:koin-android:$koin"
+    implementation "org.koin:koin-androidx-viewmodel:$koin"
 }
