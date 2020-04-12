@@ -21,41 +21,43 @@ private const val BASE_URL = "https://www.googleapis.com/"
 
 val remoteModule = module {
 
-    //okhttp 캐시설정
+    //okhttp 캐쉬 설정
     single { Cache(androidApplication().cacheDir, 10L * 1024 * 1024) }
 
-    //Gson 빌드
+
     single { GsonBuilder().create() }
 
-    //okhttp 클라이언트 초기화
-    single { OkHttpClient.Builder().apply {
-        cache(get())
-        connectTimeout(CONNECT_TIMEOUT,TimeUnit.SECONDS)
-        writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
-        readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
-        retryOnConnectionFailure(true)
-        addInterceptor(get())
-        addInterceptor(HttpLoggingInterceptor().apply {
-            if (BuildConfig.DEBUG){
-                level = HttpLoggingInterceptor.Level.BODY
-            }
-        })
-    }}
 
-    //retrofit 초기화
+    single {
+        OkHttpClient.Builder().apply {
+            cache(get())
+            connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
+            writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
+            readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+            retryOnConnectionFailure(true)
+            addInterceptor(get())
+            addInterceptor(HttpLoggingInterceptor().apply {
+                if (BuildConfig.DEBUG) {
+                    level = HttpLoggingInterceptor.Level.BODY
+                }
+            })
+        }.build()
+    }
+
+
     single { Retrofit.Builder().apply {
         baseUrl(BASE_URL)
         addConverterFactory(GsonConverterFactory.create())
         addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        client(get()) // 네트워크 계층의 OKHTTP 클라이언트를 생성해놓은 객체를 가져옴. ** RETROFIT은 OKHTTP 위에서 동작함.
-        build()
-    }}
+        client(get())
+        }.build()
+    }
 
-    //okhttp 인터셉터 초기화
+
     single {
-        Interceptor{ chain ->
+        Interceptor { chain ->
             chain.proceed(chain.request().newBuilder().apply {
-                header("Accept","application/json")
+                header("Accept", "application/json")
             }.build())
         }
     }

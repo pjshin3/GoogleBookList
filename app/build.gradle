@@ -32,6 +32,11 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    // work-runtime-ktx 2.1.0 and above now requires Java 8
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
 }
 
 dependencies {
@@ -67,4 +72,13 @@ dependencies {
     implementation "org.koin:koin-core:$koin"
     implementation "org.koin:koin-android:$koin"
     implementation "org.koin:koin-androidx-viewmodel:$koin"
+
+    //rxjava2
+    implementation "io.reactivex.rxjava2:rxandroid:$rxjava2"
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava2"
+
+    //lifecycle
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
 }

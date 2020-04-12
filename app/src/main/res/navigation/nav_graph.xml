@@ -21,5 +21,7 @@
 
     <fragment
         android:id="@+id/book_detail"
+        android:name="com.example.mygooglebook.detail.DetailFragment"
+        tools:layout="@layout/fragment_book_detail"
         />
 </navigation>

@@ -4,4 +4,5 @@
 
 
     <string name="what_you_want">What You Want ?</string>
+    <string name="hint_book_name">Write Book name</string>
 </resources>
