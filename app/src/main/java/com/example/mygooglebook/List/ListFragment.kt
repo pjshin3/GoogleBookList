@@ -1,6 +1,7 @@
 package com.example.mygooglebook.List
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,14 +20,16 @@ class ListFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentBookListBinding.inflate(inflater,container,false)
+        val adapter = ListFragmentAdapter()
+        binding.listRecyclerview.adapter  = adapter
+        observeBookList(adapter)
 
         return binding.root
     }
 
-    fun observeBookList(){
+    fun observeBookList(adapter : ListFragmentAdapter){
         viewmodel.bookList.observe(viewLifecycleOwner) {
-            // TODO
-            //  리졸트 받는 값을 어뎁터에 연결시켜줘야 함.
+            adapter.submitList(it)
         }
     }
 

@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
+    <data>
+        <variable
+            name="item"
+            type="com.example.mygooglebook.remote.data.VolumeInfoList" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -14,6 +21,7 @@
             android:id="@+id/item_image_view"
             android:layout_width="100dp"
             android:layout_height="90dp"
+            app:imageFromUrl="@{item.imageLinks.smallThumbnail}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             />
@@ -22,6 +30,7 @@
             android:id="@+id/item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{item.title}"
             app:layout_constraintLeft_toRightOf="@+id/item_image_view"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -29,6 +38,8 @@
             />
 
         <TextView
+            android:id="@+id/item_author"
+            android:text="@{item.authors[0]}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toRightOf="@+id/item_image_view"

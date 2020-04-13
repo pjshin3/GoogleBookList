@@ -6,8 +6,12 @@ import com.example.mygooglebook.remote.SeachBookRepository
 class SeachViewModel (private val seachRepository : SeachBookRepository) : ViewModel(){
 
     fun seachBookStart(world : String){
-        //TODO
-        //검색 레포지토리에 필요한 정보를 넘겨주면됨
+        val param : MutableMap<String,String> = mutableMapOf()
+        param.put("q",world)
+        param.put("oderBy","newest")
+        param.put("key","AIzaSyC1gWxwOTOlanFaEl4nGgSz6goRRhYKZbo")
+
+        seachRepository.SeachingBookList(param)
     }
 
 }

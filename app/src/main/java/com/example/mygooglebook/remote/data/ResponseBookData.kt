@@ -19,7 +19,6 @@ data class VolumeInfoList(
     @SerializedName("publisher") val publisher : String,
     @SerializedName("description") val description : String,
     @SerializedName("infoLink") val infoLink : String
-
 )
 
 data class ImageLinksList(
