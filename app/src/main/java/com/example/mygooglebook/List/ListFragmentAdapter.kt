@@ -6,10 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mygooglebook.databinding.ItemBookBinding
+import com.example.mygooglebook.remote.data.Items
 import com.example.mygooglebook.remote.data.ResponseBookData
 import com.example.mygooglebook.remote.data.VolumeInfoList
 
-class ListFragmentAdapter : ListAdapter<ResponseBookData, RecyclerView.ViewHolder>(itemDiffCallback()){
+class ListFragmentAdapter : ListAdapter<Items, RecyclerView.ViewHolder>(itemDiffCallback()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return listItemViewHolder(ItemBookBinding.inflate(LayoutInflater.from(parent.context),parent,false))
@@ -17,7 +18,7 @@ class ListFragmentAdapter : ListAdapter<ResponseBookData, RecyclerView.ViewHolde
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is listItemViewHolder){
-            val item = getItem(position).items[position]
+            val item = getItem(position)
             holder.bind(item.volumeInfo)
         }
     }
@@ -28,18 +29,14 @@ class ListFragmentAdapter : ListAdapter<ResponseBookData, RecyclerView.ViewHolde
         }
     }
 
-    private class itemDiffCallback : DiffUtil.ItemCallback<ResponseBookData>() {
-        override fun areItemsTheSame(
-            oldItem: ResponseBookData,
-            newItem: ResponseBookData
-        ): Boolean {
+    private class itemDiffCallback : DiffUtil.ItemCallback<Items>() {
+
+
+        override fun areItemsTheSame(oldItem: Items, newItem: Items): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(
-            oldItem: ResponseBookData,
-            newItem: ResponseBookData
-        ): Boolean {
+        override fun areContentsTheSame(oldItem: Items, newItem: Items): Boolean {
             return oldItem == newItem
         }
     }

@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.observe
 import androidx.fragment.app.Fragment
 import com.example.mygooglebook.databinding.FragmentBookListBinding
+import com.example.mygooglebook.remote.data.ImageLinksList
+import com.example.mygooglebook.remote.data.Items
+import com.example.mygooglebook.remote.data.VolumeInfoList
 import org.koin.android.ext.android.inject
 
 class ListFragment : Fragment(){
@@ -24,12 +27,13 @@ class ListFragment : Fragment(){
         binding.listRecyclerview.adapter  = adapter
         observeBookList(adapter)
 
+
         return binding.root
     }
 
     fun observeBookList(adapter : ListFragmentAdapter){
-        viewmodel.bookList.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+        viewmodel.bookList.observe(viewLifecycleOwner){
+            Log.e("ListFragment","옵저브 성공")
         }
     }
 
