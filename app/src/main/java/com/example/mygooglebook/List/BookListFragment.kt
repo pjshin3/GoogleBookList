@@ -8,14 +8,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.observe
 import androidx.fragment.app.Fragment
 import com.example.mygooglebook.databinding.FragmentBookListBinding
-import com.example.mygooglebook.remote.data.ImageLinksList
-import com.example.mygooglebook.remote.data.Items
-import com.example.mygooglebook.remote.data.VolumeInfoList
 import org.koin.android.ext.android.inject
 
-class ListFragment : Fragment(){
+class BookListFragment : Fragment(){
 
-    private val viewmodel : ListViewModel by inject()
+    private val viewmodel : BookListViewModel by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,17 +20,17 @@ class ListFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentBookListBinding.inflate(inflater,container,false)
-        val adapter = ListFragmentAdapter()
+        val adapter = BookListFragmentAdapter()
         binding.listRecyclerview.adapter  = adapter
-        observeBookList(adapter)
-
+        observeBookList(binding,adapter)
 
         return binding.root
     }
 
-    fun observeBookList(adapter : ListFragmentAdapter){
+    fun observeBookList(binding : FragmentBookListBinding ,adapter : BookListFragmentAdapter){
         viewmodel.bookList.observe(viewLifecycleOwner){
-            Log.e("ListFragment","옵저브 성공")
+            binding.hasList = !it.items.isNullOrEmpty()
+            adapter.submitList(it.items)
         }
     }
 

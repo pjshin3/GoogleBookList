@@ -20,15 +20,15 @@ class SeachBookRepository (private val api : SeachBook) {
     private val _reulst : MutableLiveData<ResponseBookData> = MutableLiveData()
     val result : LiveData<ResponseBookData>
         get() = _reulst
+
     fun SeachingBookList (seachItem : Map<String,String>) {
         disposables.add(api.seachBookApi(seachItem)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 _reulst.value = it
-                Log.e("SeachBookRepository","성공")
             },{
-                Log.e("SeachBookRepository","오류 = $it")
+                throw Exception()
             }))
     }
 

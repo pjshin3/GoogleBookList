@@ -5,6 +5,6 @@ import androidx.lifecycle.ViewModel
 import com.example.mygooglebook.remote.SeachBookRepository
 import com.example.mygooglebook.remote.data.ResponseBookData
 
-class ListViewModel(seachRepository : SeachBookRepository) : ViewModel(){
+class BookListViewModel(seachRepository : SeachBookRepository) : ViewModel(){
     val bookList : LiveData<ResponseBookData> = seachRepository.result
 }

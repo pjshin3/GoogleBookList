@@ -14,7 +14,7 @@
 
     <fragment
         android:id="@+id/book_list"
-        android:name="com.example.mygooglebook.List.ListFragment"
+        android:name="com.example.mygooglebook.List.BookListFragment"
         tools:layout="@layout/fragment_book_list"
         />
 
