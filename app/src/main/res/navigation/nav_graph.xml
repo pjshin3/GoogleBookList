@@ -7,21 +7,43 @@
 
     <fragment
         android:id="@+id/view_pager_fragment"
-        android:name="com.example.mygooglebook.Home.HomeViewPagetFragmentt"
+        android:name="com.example.mygooglebook.Home.HomeViewPagerFragmentt"
         tools:layout="@layout/fragment_homviewpager"
-        />
+        >
+        <action
+            android:id="@+id/action_view_pager_fragment_to_book_detail"
+            app:destination="@+id/book_detail"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
 
 
     <fragment
         android:id="@+id/book_list"
         android:name="com.example.mygooglebook.List.BookListFragment"
-        tools:layout="@layout/fragment_book_list"
-        />
+        tools:layout="@layout/fragment_book_list">
+        <action
+                android:id="@+id/action_book_list_fragment_to_book_detail_fragment"
+                app:destination="@+id/book_detail"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
 
 
     <fragment
         android:id="@+id/book_detail"
         android:name="com.example.mygooglebook.detail.DetailFragment"
-        tools:layout="@layout/fragment_book_detail"
-        />
+        tools:layout="@layout/fragment_book_detail">
+        <argument
+                android:name="title"
+                app:argType="string"
+            />
+    </fragment>
+
 </navigation>

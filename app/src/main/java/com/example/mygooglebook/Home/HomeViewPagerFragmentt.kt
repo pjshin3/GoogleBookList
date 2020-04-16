@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.mygooglebook.databinding.FragmentHomviewpagerBinding
 
-class HomeViewPagetFragmentt : Fragment(){
+class HomeViewPagerFragmentt : Fragment(){
 
     override fun onCreateView(
         inflater: LayoutInflater,
