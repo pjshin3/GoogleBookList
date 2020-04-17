@@ -48,7 +48,7 @@ class BookListFragmentAdapter : ListAdapter<Items, RecyclerView.ViewHolder>(item
             view : View
         ){
             val directions =
-                HomeViewPagerFragmenttDirections.actionViewPagerFragmentToBookDetail(item.title)
+                HomeViewPagerFragmenttDirections.actionViewPagerFragmentToBookDetail(item.title,item.imageLinks.smallThumbnail,item.description)
             view.findNavController().navigate(directions)
         }
 

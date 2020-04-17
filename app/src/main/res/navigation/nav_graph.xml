@@ -41,8 +41,16 @@
         android:name="com.example.mygooglebook.detail.DetailFragment"
         tools:layout="@layout/fragment_book_detail">
         <argument
-                android:name="title"
-                app:argType="string"
+             android:name="title"
+             app:argType="string"
+            />
+        <argument
+            android:name="imageUrl"
+            app:argType="string"
+            />
+        <argument
+            android:name="Description"
+            app:argType="string"
             />
     </fragment>
 

@@ -1,12 +1,10 @@
 package com.example.mygooglebook.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavArgs
 import androidx.navigation.fragment.navArgs
 import com.example.mygooglebook.databinding.FragmentBookDetailBinding
 
@@ -20,9 +18,14 @@ class DetailFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         val bindig = FragmentBookDetailBinding.inflate(inflater,container,false)
+        val detailViewModel = DetailViewModelFactory(
+            title = arg.title,
+            imageUrl = arg.imageUrl,
+            description = arg.Description)
+            .create(DetailViewModel::class.java)
 
-        Log.e("DetailFragment","${arg.title}")
-        
+        bindig.viewmodel = detailViewModel
+
         return bindig.root
     }
 }
