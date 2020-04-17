@@ -1,7 +1,5 @@
 # GoogleBookList
 
-# Degine Patton = MVVM
-
 # technique stack 
 - koltin
 - retrofit2
@@ -9,7 +7,7 @@
 - navigation
 - databinding
 - corutine
-
+- MVVM
 
 # Goal 
 - improving android and kotiln 
