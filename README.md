@@ -1,4 +1,6 @@
 # GoogleBookList
+- Book search app using Google Book API
+
 
 # technique stack 
 - koltin
