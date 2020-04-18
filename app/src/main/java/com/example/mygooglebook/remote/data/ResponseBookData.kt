@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class ResponseBookData(
     @SerializedName("totalItems") val totalItems : String,
+    @SerializedName("selfLink") val selflink : String,
     @SerializedName("items") val items : ArrayList<Items>
 )
 

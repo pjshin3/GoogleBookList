@@ -3,17 +3,11 @@ package com.example.mygooglebook.remote
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.mygooglebook.remote.data.Items
 import com.example.mygooglebook.remote.data.ResponseBookData
-import com.example.mygooglebook.remote.data.VolumeInfoList
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
-import java.lang.Exception
+
 
 class SeachBookRepository (private val api : SeachBook) {
     private val disposables: CompositeDisposable = CompositeDisposable()
@@ -26,9 +20,10 @@ class SeachBookRepository (private val api : SeachBook) {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
+                Log.e("SeachBookRepository","셀프링크 = ${it}")
                 _reulst.value = it
             },{
-                throw Exception()
+
             }))
     }
 

@@ -35,6 +35,10 @@ class BookListFragmentAdapter : ListAdapter<Items, RecyclerView.ViewHolder>(item
         private val binding: ItemBookBinding
         ): RecyclerView.ViewHolder(binding.root){
 
+        private val defultImageUrl = "http://books.google.com/books/content?id=zyTCAlFPjgYC&printsec=frontcover&img=1&zoom=5&edge=curl&imgtk=AFLRE70dbJVqfph7hFRlBelX2W4NbzCOZhPnAi3ZUz2JsAXeJllqy2stxPmBMzgtjvSAH3zUeYT4v5dKXuS77WAocFvefV6RXfbZ0ZmEW3uVgmMaj6a2I3otrNEBOQJziNBmQiXLHa6-&source=gbs_api"
+        private val defultDescription = "Notting Description.. sorry"
+        private val defultTitle = "Noting"
+
         init {
             binding.setClickListener {
                 binding.item?.let { item ->
@@ -44,11 +48,14 @@ class BookListFragmentAdapter : ListAdapter<Items, RecyclerView.ViewHolder>(item
         }
 
         private fun navigateToItem(
-            item : VolumeInfoList,
+            item : VolumeInfoList?,
             view : View
         ){
             val directions =
-                HomeViewPagerFragmenttDirections.actionViewPagerFragmentToBookDetail(item.title,item.imageLinks.smallThumbnail,item.description)
+                HomeViewPagerFragmenttDirections.actionViewPagerFragmentToBookDetail(
+                    item?.title ?: defultTitle,
+                    item?.imageLinks?.smallThumbnail ?: defultImageUrl,
+                    item?.description ?: defultDescription)
             view.findNavController().navigate(directions)
         }
 

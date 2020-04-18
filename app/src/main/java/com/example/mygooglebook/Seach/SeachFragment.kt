@@ -1,5 +1,6 @@
 package com.example.mygooglebook.Seach
 
+
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -25,6 +26,7 @@ class SeachFragment : Fragment(){
 
         val bindig = FragmentSearchBinding.inflate(inflater,container,false)
         bindig.searchButton.setOnClickListener {
+            bindig.root.hideKeyboard()
             navigateToListPage()
             startToSeach(bindig)
         }
@@ -39,5 +41,10 @@ class SeachFragment : Fragment(){
 
     fun startToSeach(binding : FragmentSearchBinding){
         viewmodel.seachBookStart(binding.searchEditFrame.text.toString())
+    }
+
+    fun View.hideKeyboard(){
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken,0)
     }
 }

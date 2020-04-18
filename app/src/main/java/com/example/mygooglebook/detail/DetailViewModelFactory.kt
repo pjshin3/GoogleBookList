@@ -11,6 +11,6 @@ class DetailViewModelFactory (
 ): ViewModelProvider.NewInstanceFactory(){
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return DetailViewModel(title = title,imageUrl = imageUrl,description = description) as T
+        return DetailViewModel(title = title,imageUrl = imageUrl ,description = description ) as T
     }
 }
