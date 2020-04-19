@@ -8,5 +8,4 @@ class DetailViewModel(
     val imageUrl : String,
     val description: String
 ) : ViewModel() {
-
 }
