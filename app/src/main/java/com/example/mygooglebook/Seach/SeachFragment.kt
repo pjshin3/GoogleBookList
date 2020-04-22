@@ -17,21 +17,17 @@ import org.koin.android.ext.android.inject
 class SeachFragment : Fragment(){
 
     private val viewmodel : SeachViewModel by inject()
-
+    private lateinit var binding : FragmentSearchBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val bindig = FragmentSearchBinding.inflate(inflater,container,false)
-        bindig.searchButton.setOnClickListener {
-            bindig.root.hideKeyboard()
-            navigateToListPage()
-            startToSeach(bindig)
-        }
+        binding = FragmentSearchBinding.inflate(inflater,container,false)
+        binding.searchButton.setOnClickListener(clickListner)
 
-        return bindig.root
+        return binding.root
     }
 
     fun navigateToListPage(){
@@ -46,5 +42,15 @@ class SeachFragment : Fragment(){
     fun View.hideKeyboard(){
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(windowToken,0)
+    }
+
+    private val clickListner = View.OnClickListener {
+        when (it.id) {
+            R.id.search_button -> {
+                binding.root.hideKeyboard()
+                navigateToListPage()
+                startToSeach(binding)
+            }
+        }
     }
 }
