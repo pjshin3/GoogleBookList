@@ -1,11 +1,12 @@
 package com.example.mygooglebook.remote
 
 import com.example.mygooglebook.remote.data.ResponseBookData
+import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.QueryMap
 
-interface SeachBook{
+interface Api{
     @GET("books/v1/volumes/")
-    fun seachBookApi(@QueryMap params : Map<String,String>) : Single<ResponseBookData>
+    fun getBookList(@QueryMap params : Map<String,String>) : Observable<ResponseBookData>
 }
