@@ -17,6 +17,8 @@ buildscript {
         materialVersion='1.1.0-alpha09'
         roomVersion='2.1.0'
         workVersion='2.1.0'
+        mock='2.19.0'
+        coretesting='2.1.0'
     }
     repositories {
         google()

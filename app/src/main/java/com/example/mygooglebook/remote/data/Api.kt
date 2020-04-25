@@ -1,4 +1,4 @@
-package com.example.mygooglebook.remote
+package com.example.mygooglebook.remote.data
 
 import com.example.mygooglebook.remote.data.ResponseBookData
 import io.reactivex.Observable

@@ -26,8 +26,7 @@ class BookListFragmentAdapter : ListAdapter<Items, RecyclerView.ViewHolder>(item
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is listItemViewHolder){
-            val item = getItem(position)
-            holder.bind(item.volumeInfo)
+            holder.bind(getItem(position).volumeInfo)
         }
     }
 

@@ -1,38 +1,41 @@
 package com.example.mygooglebook.List
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.observe
 import androidx.fragment.app.Fragment
 import com.example.mygooglebook.Seach.SeachViewModel
 import com.example.mygooglebook.databinding.FragmentBookListBinding
-import org.koin.android.ext.android.inject
+import com.example.mygooglebook.remote.data.ResponseBookData
+import com.example.mygooglebook.util.observe
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class BookListFragment : Fragment(){
 
-    private val viewmodel : SeachViewModel by inject()
-
+    private val viewmodel : SeachViewModel by sharedViewModel()
+    private val adapter = BookListFragmentAdapter()
+    lateinit var binding : FragmentBookListBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentBookListBinding.inflate(inflater,container,false)
-        val adapter = BookListFragmentAdapter()
+        binding = FragmentBookListBinding.inflate(inflater,container,false)
         binding.listRecyclerview.adapter  = adapter
-        observeBookList(binding,adapter)
+        observeBookList()
 
         return binding.root
     }
 
-    fun observeBookList(binding : FragmentBookListBinding ,adapter : BookListFragmentAdapter){
-        viewmodel.result.observe(viewLifecycleOwner){
-            binding.hasList = !it.items.isNullOrEmpty()
-            adapter.submitList(it.items)
-        }
+    private fun observeBookList(){
+        observe(viewmodel.result,::bookListLoad)
     }
 
+    private fun bookListLoad(bookList : ResponseBookData?){
+        bookList?.let {
+            binding.hasList = true
+            adapter.submitList(bookList.items)
+        }
+    }
 }

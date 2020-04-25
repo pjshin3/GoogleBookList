@@ -2,6 +2,8 @@ package com.example.mygooglebook.di
 
 import android.os.Build
 import com.example.mygooglebook.BuildConfig
+import com.example.mygooglebook.remote.data.Api
+import com.example.mygooglebook.remote.data.ApiRemoteSource
 import com.google.gson.GsonBuilder
 import okhttp3.Cache
 import okhttp3.Interceptor
@@ -61,5 +63,9 @@ val remoteModule = module {
             }.build())
         }
     }
+
+    single(createOnStart = false) { get<Retrofit>().create(Api::class.java) }
+
+    single { ApiRemoteSource(get()) }
 
 }

@@ -12,11 +12,11 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.mygooglebook.Home.BOOK_LIST_PAGE_INDEX
 import com.example.mygooglebook.R
 import com.example.mygooglebook.databinding.FragmentSearchBinding
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class SeachFragment : Fragment(){
 
-    private val viewmodel : SeachViewModel by inject()
+    private val viewmodel : SeachViewModel by sharedViewModel()
     private lateinit var binding : FragmentSearchBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,16 +30,16 @@ class SeachFragment : Fragment(){
         return binding.root
     }
 
-    fun navigateToListPage(){
+   private fun navigateToListPage(){
         requireActivity().findViewById<ViewPager2>(R.id.view_pager).currentItem =
             BOOK_LIST_PAGE_INDEX
     }
 
-    fun startToSeach(binding : FragmentSearchBinding){
+   private fun startToSeach(binding : FragmentSearchBinding){
         viewmodel.seachBookStart(binding.searchEditFrame.text.toString())
     }
 
-    fun View.hideKeyboard(){
+   private fun View.hideKeyboard(){
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(windowToken,0)
     }
