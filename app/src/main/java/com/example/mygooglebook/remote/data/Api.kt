@@ -8,5 +8,5 @@ import retrofit2.http.QueryMap
 
 interface Api{
     @GET("books/v1/volumes/")
-    fun getBookList(@QueryMap params : Map<String,String>) : Observable<ResponseBookData>
+    fun getBookList(@QueryMap params : Map<String,String>) : Single<ResponseBookData>
 }
