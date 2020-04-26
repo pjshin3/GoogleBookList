@@ -1,4 +1,4 @@
-package com.example.mygooglebook.data
+package com.example.mygooglebook.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

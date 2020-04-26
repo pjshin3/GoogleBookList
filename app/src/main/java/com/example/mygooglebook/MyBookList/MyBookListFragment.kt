@@ -5,32 +5,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.mygooglebook.data.Book
+import com.example.mygooglebook.database.Book
 import com.example.mygooglebook.databinding.FragmentMyBookListBinding
 import com.example.mygooglebook.util.observe
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class MyBookListFragment : Fragment(){
-
-    private val viewmodel : MyBookListViewModel by inject()
+    private val viewmodel : MyBookListViewModel by sharedViewModel()
     private val adapter = MyBookListAdapter()
+    private lateinit var binding : FragmentMyBookListBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentMyBookListBinding.inflate(inflater,container,false)
-
+        binding = FragmentMyBookListBinding.inflate(inflater,container,false)
         binding.listRecyclerview.adapter = adapter
-        viewmodel.getMyBookList()
+        myBookListObserve()
 
         return binding.root
     }
 
     private fun myBookListObserve(){
-
+        observe(viewmodel.result, ::bookListChange)
     }
-    private fun bookListChange(list : List<Book>){
-        adapter.submitList(list)
+    //TODO 룸에 넣어진 값을 보여주는 로직 개발 필요
+    private fun bookListChange(list : List<Book>?){
+        binding.hasitem = !list.isNullOrEmpty()
     }
 }

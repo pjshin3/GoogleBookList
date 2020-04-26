@@ -1,6 +1,7 @@
-package com.example.mygooglebook.data
+package com.example.mygooglebook.database
 
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -10,7 +11,7 @@ import io.reactivex.Observable
 @Dao
 interface BookDao{
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(item : Book)
+    fun myBookInsert(item : Book)
     @Query("SELECT * FROM book ORDER BY title")
-    fun getBook(): Observable<Book>
+    fun getBook(): LiveData<List<Book>>
 }

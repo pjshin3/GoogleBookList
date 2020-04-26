@@ -1,4 +1,4 @@
-package com.example.mygooglebook.data
+package com.example.mygooglebook.database
 
 import android.content.Context
 import androidx.room.Database
@@ -24,7 +24,8 @@ abstract class AppDataBase : RoomDatabase(){
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
                     }
-                }).build()
+                })
+                .build()
         }
     }
 

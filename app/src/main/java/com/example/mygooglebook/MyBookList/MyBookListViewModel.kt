@@ -5,26 +5,21 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.mygooglebook.data.AppDataBase
-import com.example.mygooglebook.data.Book
-import com.example.mygooglebook.data.BookDao
+import androidx.lifecycle.viewModelScope
+import com.example.mygooglebook.database.Book
+import com.example.mygooglebook.database.BookRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class MyBookListViewModel (private val bookDao: BookDao) : ViewModel(){
-    private val _result = MutableLiveData<Book>()
-    val result : LiveData<Book>
-        get() = _result
+class MyBookListViewModel (private val bookRepository : BookRepository) : ViewModel(){
+    val result : LiveData<List<Book>>
+        get() = bookRepository.getMyBookList()
 
-    @SuppressLint("CheckResult")
-    fun getMyBookList (){
-        bookDao.getBook()
-            .subscribeOn(Schedulers.newThread())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                Log.e("MyBookListViewModel","데이터베이스 가져오기 성공")
-            },{
-                throw it
-            })
+    fun inset(item : Book){
+        viewModelScope.launch(Dispatchers.Default) {
+            bookRepository.myBookInsert(book = item)
+        }
     }
 }
