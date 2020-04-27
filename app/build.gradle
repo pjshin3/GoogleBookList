@@ -100,6 +100,7 @@ dependencies {
 
     //material
     implementation "com.google.android.material:material:$materialVersion"
+    implementation "com.github.arimorty:floatingsearchview:$floatingseachview"
 
     //room
     implementation "androidx.room:room-runtime:$roomVersion"
@@ -108,6 +109,7 @@ dependencies {
 
     //work
     implementation "androidx.work:work-runtime-ktx:$workVersion"
+
 
 
 }
