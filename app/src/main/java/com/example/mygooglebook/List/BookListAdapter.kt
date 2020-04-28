@@ -17,7 +17,7 @@ import com.example.mygooglebook.remote.data.Items
 import com.example.mygooglebook.remote.data.ResponseBookData
 import com.example.mygooglebook.remote.data.VolumeInfoList
 
-class BookListFragmentAdapter : ListAdapter<Items, RecyclerView.ViewHolder>(itemDiffCallback()){
+class BookListAdapter : ListAdapter<Items, RecyclerView.ViewHolder>(itemDiffCallback()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return listItemViewHolder(ItemBookBinding.inflate

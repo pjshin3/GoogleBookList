@@ -13,8 +13,8 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class BookListFragment : Fragment(){
 
-    private val viewmodel : SeachViewModel by sharedViewModel()
-    private val adapter = BookListFragmentAdapter()
+    private val viewmodel by sharedViewModel<SeachViewModel>()
+    private val adapter = BookListAdapter()
     lateinit var binding : FragmentBookListBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,19 +23,19 @@ class BookListFragment : Fragment(){
     ): View? {
         binding = FragmentBookListBinding.inflate(inflater,container,false)
         binding.listRecyclerview.adapter  = adapter
-        observeBookList()
+//        observeBookList()
 
         return binding.root
     }
 
-    private fun observeBookList(){
-        observe(viewmodel.result,::bookListLoad)
-    }
-
-    private fun bookListLoad(bookList : ResponseBookData?){
-        bookList?.let {
-            binding.hasList = true
-            adapter.submitList(bookList.items)
-        }
-    }
+//    private fun observeBookList(){
+//        observe(viewmodel.result,::bookListLoad)
+//    }
+//
+//    private fun bookListLoad(bookList : ResponseBookData?){
+//        bookList?.let {
+//            binding.hasList = true
+//            adapter.submitList(bookList.items)
+//        }
+//    }
 }

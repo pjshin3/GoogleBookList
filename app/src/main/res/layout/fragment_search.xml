@@ -2,6 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="delegate"
+            type="com.example.mygooglebook.delegate.RemoteDelegate" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -41,8 +47,12 @@
             android:src="@drawable/search"
             android:layout_marginLeft="10dp"
             />
-
-
+        <com.arlib.floatingsearchview.FloatingSearchView
+            android:id="@+id/floatingseach"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:on_change="@{(old,new) -> delegate.onWorldChange(new)}">
+        </com.arlib.floatingsearchview.FloatingSearchView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

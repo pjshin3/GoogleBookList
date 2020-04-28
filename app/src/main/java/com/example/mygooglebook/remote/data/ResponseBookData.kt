@@ -25,3 +25,9 @@ data class VolumeInfoList(
 data class ImageLinksList(
     @SerializedName("smallThumbnail") val smallThumbnail : String
 )
+
+
+sealed class BookError{
+    object NetworkError : BookError()
+    object EmptyResultError : BookError()
+}
