@@ -10,6 +10,7 @@
 - databinding
 - corutine
 - MVVM
+- rxjava2
 
 # Goal 
 - improving android and kotiln 
