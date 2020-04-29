@@ -51,7 +51,8 @@
             android:id="@+id/floatingseach"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:on_change="@{(old,new) -> delegate.onWorldChange(new)}">
+            app:on_change="@{(old,new) -> delegate.onWorldChange(new)}"
+            app:state_change="@{delegate.seachviewmodel.state}">
         </com.arlib.floatingsearchview.FloatingSearchView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

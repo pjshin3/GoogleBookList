@@ -6,7 +6,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "book")
 data class Book(
-    @PrimaryKey @ColumnInfo(name = "id") val bookId : String,
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id") val bookId : Long,
     val title : String,
     val imageUrl : String,
     val description : String,
@@ -14,3 +15,11 @@ data class Book(
 ){
     override fun toString() = title
 }
+
+@Entity(tableName = "suggestion")
+data class Suggestion(
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id") val suggestionId: Long,
+    val title : String,
+    val queryId : String
+)

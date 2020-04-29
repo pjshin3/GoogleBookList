@@ -8,5 +8,5 @@ class RemoteDelegate(
     val adapter : BookListAdapter
 ) {
     fun onWorldChange(new : String): Unit =
-        with(seachviewmodel) {  }
+        with(seachviewmodel) { query.value = new }
 }

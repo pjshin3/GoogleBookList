@@ -13,13 +13,13 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MyBookListViewModel (private val bookRepository : BookRepository) : ViewModel(){
-    val result : LiveData<List<Book>>
-        get() = bookRepository.getMyBookList()
+class MyBookListViewModel () : ViewModel(){
+//    val result : LiveData<List<Book>>
+//        get() = bookRepository.getMyBookList()
 
     fun inset(item : Book){
         viewModelScope.launch(Dispatchers.Default) {
-            bookRepository.myBookInsert(book = item)
+//            bookRepository.myBookInsert(book = item)
         }
     }
 }

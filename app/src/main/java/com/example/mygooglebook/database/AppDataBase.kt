@@ -6,7 +6,12 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [Book::class],version = 1,exportSchema = false)
+@Database(
+    entities = [
+        Book::class,
+        Suggestion::class],
+    version = 1)
 abstract class AppDataBase : RoomDatabase(){
     abstract fun bookDao(): BookDao
+    abstract fun suggestionDao(): SuggestionDao
 }

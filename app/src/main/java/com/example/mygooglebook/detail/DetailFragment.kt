@@ -47,7 +47,7 @@ class DetailFragment : Fragment(){
             imageUrl = arg.imageUrl,
             ahtor = "",
             description = "",
-            bookId = arg.title
+            bookId = 0
         )
         return book
     }

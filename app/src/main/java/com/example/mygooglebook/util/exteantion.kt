@@ -3,6 +3,9 @@ package com.example.mygooglebook.util
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import arrow.core.Either
+import arrow.core.left
+import arrow.core.right
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.android.MainThreadDisposable
@@ -30,3 +33,6 @@ fun <T>LiveData<T>.toFlowable(): Flowable<T> =
             }
         }
     }, BackpressureStrategy.LATEST)
+
+fun <A,B> left(a : A): Either<A,B> = a.left()
+fun <A,B> right(b : B): Either<A,B> = b.right()
