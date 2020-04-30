@@ -14,13 +14,12 @@ import com.example.mygooglebook.List.BookListAdapter
 import com.example.mygooglebook.R
 import com.example.mygooglebook.databinding.FragmentSearchBinding
 import com.example.mygooglebook.delegate.RemoteDelegate
-import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class SeachFragment : Fragment(){
 
-    private val viewmodel by sharedViewModel<SeachViewModel>()
+    private val vm  by viewModel<SeachViewModel> { parametersOf(this.context!!.applicationContext) }
     private lateinit var binding : FragmentSearchBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,7 +30,8 @@ class SeachFragment : Fragment(){
         binding = FragmentSearchBinding.inflate(inflater,container,false).also {
 //            it.searchButton.setOnClickListener(clickListner)
 //            it.vm = viewmodel
-            it.delegate = RemoteDelegate(seachviewmodel = viewmodel, adapter = BookListAdapter())
+            it.lifecycleOwner = this
+            it.delegate = RemoteDelegate(seachviewmodel = vm, adapter = BookListAdapter())
         }
 
         return binding.root

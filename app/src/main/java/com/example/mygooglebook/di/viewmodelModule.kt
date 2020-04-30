@@ -11,6 +11,6 @@ val viewmodelModule = module {
     factory { DataBaseSource(get()) }
     factory { RemoteDataSource(get()) }
     factory { SeachRepository(get(),get()) }
-    factory { SeachViewModel(get()) }
+    factory { SeachViewModel(get(parameters = { it })) }
     viewModel { MyBookListViewModel() }
 }

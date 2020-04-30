@@ -1,5 +1,6 @@
 package com.example.mygooglebook.util
 
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -16,7 +17,7 @@ fun <T>LifecycleOwner.observe(livedata: LiveData<T>, action: (t : T) -> Unit){
     livedata.observe(this, Observer { t -> action(t) })
 }
 
-operator fun CompositeDisposable.plus(disposable: Disposable) = CompositeDisposable().apply {
+operator fun CompositeDisposable.plus(disposable: Disposable) : CompositeDisposable = apply {
     add(disposable)
 }
 
@@ -24,6 +25,7 @@ fun <T>LiveData<T>.toFlowable(): Flowable<T> =
     Flowable.create({emiiter ->
         val observer = Observer<T>{
             it?.let { emiiter::onNext }
+            Log.e("toFlowable","현재 입력 값은 = ${it.toString()}")
         }
         observeForever(observer)
 

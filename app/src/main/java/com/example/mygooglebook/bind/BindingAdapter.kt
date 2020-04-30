@@ -36,14 +36,14 @@ fun bindIsGone(view: View,isGone: Boolean){
 }
 
 @BindingAdapter("on_change")
-fun FloatingSearchView.listnerTextOnChange(listner : FloatingSearchView.OnQueryChangeListener) = setOnQueryChangeListener(listner)
+fun FloatingSearchView.listnerTextOnChange(
+        listner : FloatingSearchView.OnQueryChangeListener
+): Unit = setOnQueryChangeListener(listner)
 
 @BindingAdapter("state_change")
 fun FloatingSearchView.bindSuggestion(data: QueryViewState<String>?): Unit? = data?.let { state ->
     toggleProgress(data.Loading)
-
 }
-
 private fun FloatingSearchView.toggleProgress(show: Boolean): Unit = when(show){
     true -> showProgress()
     false -> hideProgress()

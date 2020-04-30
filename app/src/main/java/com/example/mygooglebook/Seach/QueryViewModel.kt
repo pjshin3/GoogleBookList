@@ -8,6 +8,7 @@ import com.example.mygooglebook.remote.data.ResponseBookData
 import com.example.mygooglebook.util.plus
 import com.example.mygooglebook.util.toFlowable
 import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import org.reactivestreams.Publisher
 
@@ -21,16 +22,11 @@ open class QueryViewModel<T>(
 
     val query : MutableLiveData<String> = MutableLiveData()
     private val disposables : CompositeDisposable = CompositeDisposable()
+
     init {
         disposables + query.toFlowable()
-            .compose { transform(it) }
-            .subscribe({
-                Log.e("QeuryViewModel","성공 ${it}")
-                _state.postValue(it)
-            },{
-                Log.e("QeuryViewModel","에러 ${it}")
-            })
+            .subscribe{ Log.e("QueryViewModel","테스트") }
     }
 
-    override fun onCleared() = disposables.clear()
+    override fun onCleared() : Unit = disposables.clear()
 }

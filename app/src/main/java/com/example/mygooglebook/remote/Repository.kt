@@ -10,11 +10,12 @@ abstract class Repository<T> (
     private val api : RemoteRepository<T>,
     private val local : DataBaseRspository<T>
 ){
-    fun find(item : String): Flowable<Either<BookError,List<T>>> =
+    fun find(item : String) =
         api.getBookList(item)
             .map { right<BookError,List<T>>(it) }
             .onErrorReturn { left<BookError,List<T>>(BookError.NetworkError) }
-            .flatMapPublisher { save(result = it,item = item) }
+            .map { it }
+
     private fun save(
         result: Either<BookError,List<T>>,
         item: String
