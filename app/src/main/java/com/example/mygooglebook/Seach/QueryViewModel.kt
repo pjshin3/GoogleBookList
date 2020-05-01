@@ -4,11 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.mygooglebook.remote.data.ResponseBookData
 import com.example.mygooglebook.util.plus
 import com.example.mygooglebook.util.toFlowable
 import io.reactivex.Flowable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import org.reactivestreams.Publisher
 
@@ -25,7 +23,11 @@ open class QueryViewModel<T>(
 
     init {
         disposables + query.toFlowable()
-            .subscribe{ Log.e("QueryViewModel","테스트") }
+            .compose { transform(it) }
+            .subscribe{
+                Log.e("QueryViewModel","성공 $it")
+                _state.postValue(it)
+            }
     }
 
     override fun onCleared() : Unit = disposables.clear()

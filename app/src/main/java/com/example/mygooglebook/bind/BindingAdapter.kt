@@ -12,8 +12,8 @@ import androidx.databinding.adapters.TextViewBindingAdapter
 import com.arlib.floatingsearchview.FloatingSearchView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.example.mygooglebook.Seach.Loading
-import com.example.mygooglebook.Seach.QueryViewState
+import com.example.mygooglebook.Seach.*
+import com.example.mygooglebook.util.toHumanResponse
 import com.google.android.material.textfield.TextInputLayout
 
 @BindingAdapter("imageFromUrl")
@@ -42,8 +42,14 @@ fun FloatingSearchView.listnerTextOnChange(
 
 @BindingAdapter("state_change")
 fun FloatingSearchView.bindSuggestion(data: QueryViewState<String>?): Unit? = data?.let { state ->
-    toggleProgress(data.Loading)
+    toggleProgress(state.Loading)
+    state.error.fold({
+        state.Result.map { QuerySearchSuggestion.ResultSuggestion(it) }
+    },{
+        listOf(QuerySearchSuggestion.ErrorSuggestion(it.toHumanResponse()))
+    }).let { swapSuggestions(it) }
 }
+
 private fun FloatingSearchView.toggleProgress(show: Boolean): Unit = when(show){
     true -> showProgress()
     false -> hideProgress()

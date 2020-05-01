@@ -4,8 +4,7 @@ import com.example.mygooglebook.List.BookListAdapter
 import com.example.mygooglebook.Seach.SeachViewModel
 
 class RemoteDelegate(
-    val seachviewmodel : SeachViewModel,
-    val adapter : BookListAdapter
+    val seachviewmodel : SeachViewModel
 ) {
     fun onWorldChange(new : String): Unit =
         with(seachviewmodel) {query.value = new}

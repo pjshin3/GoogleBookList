@@ -15,14 +15,4 @@ abstract class Repository<T> (
             .map { right<BookError,List<T>>(it) }
             .onErrorReturn { left<BookError,List<T>>(BookError.NetworkError) }
             .map { it }
-
-    private fun save(
-        result: Either<BookError,List<T>>,
-        item: String
-    ): Flowable<Either<BookError,List<T>>> =
-        result.fold({
-            Flowable.just(result)
-        },{
-            local.insert(item,it).toFlowable()
-        })
 }

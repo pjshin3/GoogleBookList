@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
+import com.example.mygooglebook.remote.data.BookError
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.android.MainThreadDisposable
@@ -21,20 +22,25 @@ operator fun CompositeDisposable.plus(disposable: Disposable) : CompositeDisposa
     add(disposable)
 }
 
-fun <T>LiveData<T>.toFlowable(): Flowable<T> =
-    Flowable.create({emiiter ->
-        val observer = Observer<T>{
-            it?.let { emiiter::onNext }
-            Log.e("toFlowable","현재 입력 값은 = ${it.toString()}")
-        }
-        observeForever(observer)
-
-        emiiter.setCancellable {
-            object : MainThreadDisposable(){
-                override fun onDispose() = removeObserver(observer)
+fun <T> LiveData<T>.toFlowable(): Flowable<T> =
+        Flowable.create({ emiiter ->
+            val observer = Observer<T>{
+                it?.let {emiiter.onNext(it)}
             }
-        }
-    }, BackpressureStrategy.LATEST)
+            observeForever(observer)
+
+            emiiter.setCancellable {
+                object : MainThreadDisposable(){
+                    override fun onDispose() = removeObserver(observer)
+                }
+            }
+        }, BackpressureStrategy.LATEST)
 
 fun <A,B> left(a : A): Either<A,B> = a.left()
 fun <A,B> right(b : B): Either<A,B> = b.right()
+
+
+fun BookError.toHumanResponse(): String = when(this) {
+    BookError.NetworkError -> "check your app network"
+    BookError.EmptyResultError -> "search without suggestion"
+}
