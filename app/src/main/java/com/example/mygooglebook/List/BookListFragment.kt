@@ -5,15 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.mygooglebook.Seach.SeachViewModel
+import com.example.mygooglebook.Seach.SuggestionViewModel
 import com.example.mygooglebook.databinding.FragmentBookListBinding
-import com.example.mygooglebook.remote.data.ResponseBookData
-import com.example.mygooglebook.util.observe
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class BookListFragment : Fragment(){
 
-    private val viewmodel by sharedViewModel<SeachViewModel>()
+    private val viewmodel by sharedViewModel<SuggestionViewModel>()
     private val adapter = BookListAdapter()
     lateinit var binding : FragmentBookListBinding
     override fun onCreateView(

@@ -5,13 +5,13 @@ import io.reactivex.Flowable
 import org.reactivestreams.Publisher
 import java.util.concurrent.TimeUnit
 
-class SeachViewModel private constructor(
+class SuggestionViewModel private constructor(
     transform: (Flowable<String>) -> Publisher<QueryViewState<String>>
 ) : QueryViewModel<String>(transform){
 
     companion object{
 
-        operator fun invoke(api : SeachRepository) : SeachViewModel = SeachViewModel{
+        operator fun invoke(api : SeachRepository) : SuggestionViewModel = SuggestionViewModel{
             it.debounce(400, TimeUnit.MICROSECONDS)
                 .switchMap { query -> handleQuery(query,api) }
                 .startWith( QueryViewState.idel() )
@@ -32,7 +32,7 @@ class SeachViewModel private constructor(
             query: String,
             api : SeachRepository
         ): Flowable<QueryViewState<String>> =
-            api.find(query).toFlowable()
+            api.searchSuggestion(query).toFlowable()
                 .map { it.toViewState() }
                 .startWith(QueryViewState.loading())
 

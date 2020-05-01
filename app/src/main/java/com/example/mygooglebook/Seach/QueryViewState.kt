@@ -2,7 +2,6 @@ package com.example.mygooglebook.Seach
 
 import arrow.core.Either
 import com.example.mygooglebook.remote.data.BookError
-import com.example.mygooglebook.remote.data.ResponseBookData
 
 sealed class QueryViewState<out T>{
 

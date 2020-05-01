@@ -1,6 +1,7 @@
 package com.example.mygooglebook.bind
 
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
@@ -10,11 +11,13 @@ import androidx.core.widget.addTextChangedListener
 import androidx.databinding.BindingAdapter
 import androidx.databinding.adapters.TextViewBindingAdapter
 import com.arlib.floatingsearchview.FloatingSearchView
+import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.mygooglebook.Seach.*
 import com.example.mygooglebook.util.toHumanResponse
 import com.google.android.material.textfield.TextInputLayout
+import io.reactivex.functions.Consumer
 
 @BindingAdapter("imageFromUrl")
 fun bindImageFromUrl(view:ImageView, imageUrl: String?){
@@ -53,4 +56,27 @@ fun FloatingSearchView.bindSuggestion(data: QueryViewState<String>?): Unit? = da
 private fun FloatingSearchView.toggleProgress(show: Boolean): Unit = when(show){
     true -> showProgress()
     false -> hideProgress()
+}
+
+interface ClickConsumer : Consumer<SearchSuggestion>
+interface SearchConsumer : Consumer<String>
+
+@BindingAdapter("on_suggestion_click","on_search",requireAll = false)
+fun FloatingSearchView.bindSuggestionClick(clickConsumer: ClickConsumer?,searchConsumer: SearchConsumer?){
+    setOnSearchListener(object : FloatingSearchView.OnSearchListener{
+        override fun onSearchAction(currentQuery: String?) {
+            searchConsumer?.apply { searchConsumer.accept(currentQuery) }
+        }
+
+        override fun onSuggestionClicked(searchSuggestion: SearchSuggestion?) {
+            clickConsumer?.apply {
+                when(searchSuggestion){
+                    is QuerySearchSuggestion.ResultSuggestion -> {
+                        clickConsumer.accept(searchSuggestion)
+                        setSearchFocused(false)
+                    }
+                }
+            }
+        }
+    })
 }
