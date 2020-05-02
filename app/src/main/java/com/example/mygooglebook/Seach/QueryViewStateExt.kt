@@ -19,3 +19,5 @@ val <T>QueryViewState<T>.Result : List<T>
         is QueryViewState.Result -> _reuslt
         else -> emptyList()
     }
+val <T> QueryViewState<T>.hasError : Boolean
+    get() = !error.isEmpty()

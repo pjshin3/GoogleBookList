@@ -20,21 +20,6 @@
             />
     </fragment>
 
-
-    <fragment
-        android:id="@+id/book_list"
-        android:name="com.example.mygooglebook.List.BookListFragment"
-        tools:layout="@layout/fragment_book_list">
-        <action
-                android:id="@+id/action_book_list_fragment_to_book_detail_fragment"
-                app:destination="@+id/book_detail"
-                app:enterAnim="@anim/slide_in_right"
-                app:exitAnim="@anim/slide_out_left"
-                app:popEnterAnim="@anim/slide_in_left"
-                app:popExitAnim="@anim/slide_out_right"
-            />
-    </fragment>
-
     <fragment
         android:id="@+id/book_detail"
         android:name="com.example.mygooglebook.detail.DetailFragment"

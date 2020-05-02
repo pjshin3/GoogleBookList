@@ -2,7 +2,6 @@ package com.example.mygooglebook.Home
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.mygooglebook.List.BookListFragment
 import com.example.mygooglebook.MyBookList.MyBookListFragment
 import com.example.mygooglebook.Seach.SeachFragment
 import java.lang.IndexOutOfBoundsException
@@ -15,7 +14,6 @@ class HomeViewPagerAdapter (fragment: Fragment) : FragmentStateAdapter(fragment)
 
     private val viewPagerFragmentCreator: Map<Int , () -> Fragment> = mapOf(
         SEACH_PAGE_INDEX to {SeachFragment()},
-        BOOK_LIST_PAGE_INDEX to {BookListFragment()},
         MY_BOOK_LIST_PAGE_INDEX to {MyBookListFragment()}
     )
 

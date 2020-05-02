@@ -2,6 +2,7 @@ package com.example.mygooglebook.remote
 
 import com.example.mygooglebook.database.AppDataBase
 import com.example.mygooglebook.remote.data.Api
+import com.example.mygooglebook.remote.data.Items
 import com.example.mygooglebook.remote.data.ResponseBookData
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -20,10 +21,10 @@ class RemoteDataSource (
                     .map { it.volumeInfo.title }
             }
 
-    override fun getBookList(item: String): Single<ResponseBookData> =
+    override fun getBookList(item: String): Single<List<Items>> =
         api.getBookList(genarateSerchParams(item))
             .subscribeOn(Schedulers.io())
-            .map { it }
+            .map { it.items }
 
 
     private fun genarateSerchParams(world : String) : Map<String,String>{

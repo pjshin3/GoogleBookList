@@ -25,7 +25,7 @@ open class QueryViewModel<T>(
         disposables + query.toFlowable()
             .compose { transform(it) }
             .subscribe{
-                Log.e("QueryViewModel","아이템 = $it")
+                Log.e("QueryViewModel","아이템 = ${it}")
                 _state.postValue(it)
             }
     }

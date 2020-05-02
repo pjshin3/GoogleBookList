@@ -3,21 +3,22 @@ package com.example.mygooglebook.bind
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.SearchView
-import android.widget.TextView
+import android.widget.*
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.BindingAdapter
 import androidx.databinding.adapters.TextViewBindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.arlib.floatingsearchview.FloatingSearchView
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.example.mygooglebook.List.BookListAdapter
 import com.example.mygooglebook.Seach.*
+import com.example.mygooglebook.remote.data.Items
 import com.example.mygooglebook.util.toHumanResponse
 import com.google.android.material.textfield.TextInputLayout
 import io.reactivex.functions.Consumer
+import kotlinx.android.synthetic.main.fragment_book_detail.view.*
 
 @BindingAdapter("imageFromUrl")
 fun bindImageFromUrl(view:ImageView, imageUrl: String?){
@@ -80,3 +81,35 @@ fun FloatingSearchView.bindSuggestionClick(clickConsumer: ClickConsumer?,searchC
         }
     })
 }
+
+fun View.gone(gone:Boolean) = with(this){
+    visibility = when(gone){
+        true -> View.GONE
+        false -> View.VISIBLE
+    }
+}
+
+@BindingAdapter("adapter","state_change",requireAll = false)
+fun RecyclerView.bindStateData(inputAdapter: BookListAdapter,data:QueryViewState<Items>?){
+    if (adapter == null){
+        adapter = inputAdapter
+    }
+
+    data?.let {
+        bindError(data.hasError)
+        bindResult(data.Result)
+    }
+}
+
+@BindingAdapter("state_change")
+fun ProgressBar.bindState(data:QueryViewState<Items>?) = data?.let {
+    gone(!it.Loading)
+}
+private fun RecyclerView.bindError(error: Boolean): Unit =
+    gone(error)
+
+private fun RecyclerView.bindResult(reulst: List<Items>): Unit =
+    with(adapter as BookListAdapter){
+        this.submitList(reulst)
+    }
+
