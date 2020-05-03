@@ -6,7 +6,7 @@
     <data>
         <variable
             name="delegate"
-            type="com.example.mygooglebook.delegate.RemoteDelegate" />
+            type="com.example.mygooglebook.delegate.SearchDelegate" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,13 +15,11 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_recyclerview"
+            android:layout_marginTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_book"
-            app:floatingSearch_searchBarMarginLeft="8dp"
-            app:floatingSearch_searchBarMarginRight="8dp"
-            app:floatingSearch_searchBarMarginTop="8dp"
             app:adapter="@{delegate.adapter}"
             app:state_change="@{delegate.searchViewModel.state}"
             />

@@ -4,7 +4,7 @@ import com.example.mygooglebook.List.BookListAdapter
 import com.example.mygooglebook.Seach.SearchViewModel
 import com.example.mygooglebook.Seach.SuggestionViewModel
 
-class RemoteDelegate(
+class SearchDelegate(
     val suggetionViewModel : SuggestionViewModel,
     val searchViewModel : SearchViewModel,
     val adapter : BookListAdapter

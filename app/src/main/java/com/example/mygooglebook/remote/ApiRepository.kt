@@ -1,6 +1,6 @@
 package com.example.mygooglebook.remote
 
-class SeachRepository(
+class ApiRepository(
     remote: RemoteDataSource,
     local: DataBaseSource
 ): Repository<String>(remote,local)

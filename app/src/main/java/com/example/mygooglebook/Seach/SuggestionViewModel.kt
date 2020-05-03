@@ -1,6 +1,6 @@
 package com.example.mygooglebook.Seach
 
-import com.example.mygooglebook.remote.SeachRepository
+import com.example.mygooglebook.remote.ApiRepository
 import io.reactivex.Flowable
 import org.reactivestreams.Publisher
 import java.util.concurrent.TimeUnit
@@ -11,7 +11,7 @@ class SuggestionViewModel private constructor(
 
     companion object{
 
-        operator fun invoke(api : SeachRepository) : SuggestionViewModel = SuggestionViewModel{
+        operator fun invoke(api : ApiRepository) : SuggestionViewModel = SuggestionViewModel{
             it.debounce(400, TimeUnit.MICROSECONDS)
                 .switchMap { query -> handleQuery(query,api) }
                 .startWith( QueryViewState.idel() )
@@ -20,7 +20,7 @@ class SuggestionViewModel private constructor(
 
         private fun handleQuery(
             query : String,
-            api : SeachRepository
+            api : ApiRepository
         ): Flowable<QueryViewState<String>> =
             if (query.isEmpty()){
                 Flowable.just(QueryViewState.idel())
@@ -30,7 +30,7 @@ class SuggestionViewModel private constructor(
 
         private fun searchSuggestions(
             query: String,
-            api : SeachRepository
+            api : ApiRepository
         ): Flowable<QueryViewState<String>> =
             api.searchSuggestion(query).toFlowable()
                 .map { it.toViewState() }

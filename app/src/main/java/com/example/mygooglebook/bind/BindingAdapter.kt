@@ -16,6 +16,7 @@ import com.example.mygooglebook.List.BookListAdapter
 import com.example.mygooglebook.Seach.*
 import com.example.mygooglebook.remote.data.Items
 import com.example.mygooglebook.util.toHumanResponse
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputLayout
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.fragment_book_detail.view.*
@@ -113,3 +114,6 @@ private fun RecyclerView.bindResult(reulst: List<Items>): Unit =
         this.submitList(reulst)
     }
 
+@BindingAdapter("on_click")
+fun FloatingActionButton.bindOnClick(onClickListener: View.OnClickListener) =
+    setOnClickListener(onClickListener)

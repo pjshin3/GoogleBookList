@@ -8,10 +8,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(
     entities = [
-        Book::class,
-        Suggestion::class],
-    version = 1)
+        Book::class
+    ], version = 1)
 abstract class AppDataBase : RoomDatabase(){
     abstract fun bookDao(): BookDao
-    abstract fun suggestionDao(): SuggestionDao
 }

@@ -6,49 +6,40 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.example.mygooglebook.MyBookList.MyBookListViewModel
 import com.example.mygooglebook.database.Book
 import com.example.mygooglebook.databinding.FragmentBookDetailBinding
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import com.example.mygooglebook.delegate.DetailDelegate
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class DetailFragment : Fragment(){
 
-   private val arg : DetailFragmentArgs by navArgs()
-   private val myBookListViewModel : MyBookListViewModel by sharedViewModel()
+    private val arg : DetailFragmentArgs by navArgs()
+    private val detailViewModel by viewModel<DetailViewModel> { parametersOf(this.context!!.applicationContext) }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val bindig = FragmentBookDetailBinding.inflate(inflater,container,false)
 
-        val detailViewModel = DetailViewModelFactory(
-            title = arg.title,
-            imageUrl = arg.imageUrl,
-            description = arg.Description)
-            .create(DetailViewModel::class.java)
+        with(detailViewModel){
+            book.value = genarateBoo()
+        }
 
-        bindig.viewmodel = detailViewModel
-
-        bindig.addActionbutton.setOnClickListener {
-            insetToDatabase()
+        val bindig = FragmentBookDetailBinding.inflate(inflater,container,false).also {
+            it.delegate = DetailDelegate(
+                detailViewModel
+            )
         }
 
         return bindig.root
     }
 
-    fun insetToDatabase(){
-        myBookListViewModel.inset(genarateBook())
-    }
-
-    fun genarateBook(): Book{
-        val book = Book(
-            title = arg.title,
-            imageUrl = arg.imageUrl,
-            ahtor = "",
-            description = "",
-            bookId = 0
-        )
-        return book
-    }
+    fun genarateBoo() = Book(
+        bookId = 0,
+        title = arg.title,
+        imageUrl = arg.imageUrl,
+        ahtor = "",
+        description = arg.Description
+    )
 }

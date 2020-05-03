@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="viewmodel"
-            type="com.example.mygooglebook.detail.DetailViewModel" />
+            name="delegate"
+            type="com.example.mygooglebook.delegate.DetailDelegate" />
 
     </data>
 
@@ -29,14 +29,14 @@
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:title="@{viewmodel.title}"
+                app:title="@{delegate.detailViewModel.book.title}"
                 >
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="280dp"
                     android:id="@+id/detail_imageview"
-                    imageFromUrl="@{viewmodel.imageUrl}"
+                    imageFromUrl="@{delegate.detailViewModel.book.imageUrl}"
                     >
                 </ImageView>
 
@@ -59,7 +59,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@{viewmodel.description}"
+                android:text="@{delegate.detailViewModel.book.description}"
                 >
 
             </TextView>
@@ -70,7 +70,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_anchor="@id/appbar"
-            app:layout_anchorGravity="bottom|end">
+            app:layout_anchorGravity="bottom|end"
+            app:on_click="@{ () -> delegate.onActionButtonClick() }">
 
         </com.google.android.material.floatingactionbutton.FloatingActionButton>
 

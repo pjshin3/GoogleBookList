@@ -23,15 +23,16 @@ class MyBookListFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentMyBookListBinding.inflate(inflater,container,false)
-        binding.listRecyclerview.adapter = adapter
+        binding = FragmentMyBookListBinding.inflate(inflater,container,false).also {
+            it.listRecyclerview.adapter = adapter
+        }
         myBookListObserve()
 
         return binding.root
     }
 
     private fun myBookListObserve(){
-//        observe(viewmodel.result, ::bookListChange)
+        observe(viewmodel.result, ::bookListChange)
     }
     //TODO 룸에 넣어진 값을 보여주는 로직 개발 필요
     private fun bookListChange(list : List<Book>?){

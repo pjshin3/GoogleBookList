@@ -1,6 +1,5 @@
 package com.example.mygooglebook.Seach
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,7 +24,6 @@ open class QueryViewModel<T>(
         disposables + query.toFlowable()
             .compose { transform(it) }
             .subscribe{
-                Log.e("QueryViewModel","아이템 = ${it}")
                 _state.postValue(it)
             }
     }

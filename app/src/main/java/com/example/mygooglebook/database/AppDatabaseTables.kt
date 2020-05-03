@@ -15,11 +15,3 @@ data class Book(
 ){
     override fun toString() = title
 }
-
-@Entity(tableName = "suggestion")
-data class Suggestion(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id") val suggestionId: Long,
-    val title : String,
-    val queryId : String
-)

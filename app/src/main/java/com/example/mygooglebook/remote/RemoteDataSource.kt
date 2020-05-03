@@ -1,16 +1,17 @@
 package com.example.mygooglebook.remote
 
+import androidx.lifecycle.LiveData
 import com.example.mygooglebook.database.AppDataBase
-import com.example.mygooglebook.remote.data.Api
+import com.example.mygooglebook.database.Book
+import com.example.mygooglebook.remote.data.RemoteApi
 import com.example.mygooglebook.remote.data.Items
-import com.example.mygooglebook.remote.data.ResponseBookData
 import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.internal.operators.completable.CompletableFromAction
 import io.reactivex.schedulers.Schedulers
 
 class RemoteDataSource (
-    private val api : Api
+    private val api : RemoteApi
 ) : RemoteRepository<String> {
     override fun getSuggetionList(item : String): Single<List<String>> =
         api.getBookList(genarateSerchParams(item))
@@ -27,22 +28,22 @@ class RemoteDataSource (
             .map { it.items }
 
 
-    private fun genarateSerchParams(world : String) : Map<String,String>{
-        val param = mutableMapOf<String,String>()
-        with(param){
-            put("q",world)
-            put("oderBy","newest")
-            put("key","AIzaSyC1gWxwOTOlanFaEl4nGgSz6goRRhYKZbo")
-        }
-        return param
-    }
+    private fun genarateSerchParams(world : String) : Map<String,String> =
+         mutableMapOf<String,String>(
+            "q" to world,
+            "oderBy" to "newest",
+            "key" to "AIzaSyC1gWxwOTOlanFaEl4nGgSz6goRRhYKZbo"
+        )
 }
 
 class DataBaseSource(
     private val appDataBase: AppDataBase
 ) : DataBaseRspository<String> {
-    override fun insert(item: String, list: List<String>) : Completable =
-        CompletableFromAction{
-            appDataBase.suggestionDao().InsertSuggestion(item,list)
+    override fun insert(item: Book): Completable =
+        Completable.fromAction {
+            appDataBase.bookDao().myBookInsert(item)
         }.subscribeOn(Schedulers.single())
+
+    override fun getMyBookList(): LiveData<List<Book>> =
+        appDataBase.bookDao().getBook()
 }
