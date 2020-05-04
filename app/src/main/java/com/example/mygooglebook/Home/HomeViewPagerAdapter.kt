@@ -8,7 +8,6 @@ import java.lang.IndexOutOfBoundsException
 
 
 const val SEACH_PAGE_INDEX = 1
-const val BOOK_LIST_PAGE_INDEX = 2
 const val MY_BOOK_LIST_PAGE_INDEX = 0
 class HomeViewPagerAdapter (fragment: Fragment) : FragmentStateAdapter(fragment){
 

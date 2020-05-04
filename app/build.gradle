@@ -85,7 +85,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
-    kapt "android.arch.lifecycle:compiler:$lifecycleVersion"
+    kapt 'androidx.lifecycle:lifecycle-compiler:2.0.0'
 
     //recyclerview
     implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
@@ -105,13 +105,12 @@ dependencies {
     //room
     implementation "androidx.room:room-runtime:$roomVersion"
     implementation "androidx.room:room-ktx:$roomVersion"
-    kapt "android.arch.persistence.room:compiler:$roomVersion"
+    kapt 'androidx.room:room-compiler:2.0.0'
 
     //work
     implementation "androidx.work:work-runtime-ktx:$workVersion"
 
     //arrow
     implementation "io.arrow-kt:arrow-core:$arrow"
-
 
 }
