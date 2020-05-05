@@ -6,36 +6,33 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.example.mygooglebook.BaseFragment
+import com.example.mygooglebook.R
 import com.example.mygooglebook.database.Book
 import com.example.mygooglebook.databinding.FragmentBookDetailBinding
 import com.example.mygooglebook.delegate.DetailDelegate
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class DetailFragment : Fragment(){
+class DetailFragment
+    : BaseFragment<FragmentBookDetailBinding>(R.layout.fragment_book_detail){
 
     private val arg : DetailFragmentArgs by navArgs()
     private val detailViewModel by viewModel<DetailViewModel> { parametersOf(this.context!!.applicationContext) }
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         with(detailViewModel){
-            book.value = genarateBoo()
+            book.value = genarateBook()
         }
 
-        val bindig = FragmentBookDetailBinding.inflate(inflater,container,false).also {
-            it.delegate = DetailDelegate(
-                detailViewModel
-            )
+        with(bindig){
+            delegate = DetailDelegate( detailViewModel )
         }
-
-        return bindig.root
     }
 
-    fun genarateBoo() = Book(
+    fun genarateBook() = Book(
         bookId = 0,
         title = arg.title,
         imageUrl = arg.imageUrl,
