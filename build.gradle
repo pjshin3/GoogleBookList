@@ -21,6 +21,7 @@ buildscript {
         mock='2.19.0'
         coretesting='2.1.0'
         arrow='0.8.2'
+        kotlintest='3.3.2'
     }
     repositories {
         google()
