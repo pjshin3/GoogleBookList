@@ -22,6 +22,7 @@ buildscript {
         coretesting='2.1.0'
         arrow='0.8.2'
         kotlintest='3.3.2'
+        mockitokotlin='2.1.0'
     }
     repositories {
         google()
