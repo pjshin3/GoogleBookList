@@ -18,7 +18,8 @@ class SuggstionGenerator: Gen<Either<BookError,List<String>>>{
         return if(it){
             left(Gen.bookError().random().first())
         }else{
-            right((1..10).fold( emptyList()) { acc, _ -> acc + Gen.query().random().iterator().next() })
+            right((1..10).fold( emptyList()) { acc, _ ->
+                acc + Gen.query().random().iterator().next() })
         }
     }
 }
