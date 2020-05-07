@@ -5,8 +5,8 @@ import com.example.mygooglebook.Seach.SearchViewModel
 import com.example.mygooglebook.Seach.SuggestionViewModel
 import com.example.mygooglebook.detail.DetailViewModel
 import com.example.mygooglebook.remote.*
-import org.koin.androidx.viewmodel.ext.koin.viewModel
-import org.koin.dsl.module.module
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.module
 
 val viewmodelModule = module {
 

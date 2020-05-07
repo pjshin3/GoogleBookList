@@ -1,10 +1,12 @@
 package com.example.mygooglebook.gen
 
 import arrow.core.Either
+import com.example.mygooglebook.Seach.QueryViewState
 import com.example.mygooglebook.remote.data.BookError
 import io.kotlintest.properties.Gen
 import com.example.mygooglebook.util.left
 import com.example.mygooglebook.util.right
+import io.kotlintest.properties.filterIsInstance
 
 
 class SuggstionGenerator: Gen<Either<BookError,List<String>>>{
@@ -39,6 +41,20 @@ class QueryGenerator : Gen<String> {
     override fun random(): Sequence<String> = Gen.string().random().filter { it.isNotEmpty() }
 }
 
+class SuggestionViewStateGenerator : Gen<QueryViewState<String>>{
+    override fun constants(): Iterable<QueryViewState<String>> = listOf(
+        QueryViewState.idel(),
+        QueryViewState.loading()
+    )
+
+    override fun random(): Sequence<QueryViewState<String>> = Gen.suggestion().random().map { suggestion ->
+        suggestion.fold(
+            { QueryViewState.error<String>(it) },
+            { QueryViewState.reulst(it) }
+        )
+    }
+
+}
 
 
 fun Gen.Companion.suggestion(): Gen<Either<BookError,List<String>>> = SuggstionGenerator()
@@ -46,3 +62,7 @@ fun Gen.Companion.suggestion(): Gen<Either<BookError,List<String>>> = SuggstionG
 fun Gen.Companion.bookError(): Gen<BookError> = BookErrorGenerator()
 
 fun Gen.Companion.query(): Gen<String> = QueryGenerator()
+
+fun Gen.Companion.suggestionViewState(): Gen<QueryViewState<String>> = SuggestionViewStateGenerator()
+
+fun Gen.Companion.sugestionErrorViewState(): Gen<QueryViewState.Error> = suggestionViewState().filterIsInstance()

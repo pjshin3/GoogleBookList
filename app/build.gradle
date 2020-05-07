@@ -53,10 +53,15 @@ dependencies {
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitokotlin"
 
 
+
     androidTestImplementation "androidx.arch.core:core-testing:$coretesting"
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    testImplementation "org.koin:koin-test:$koin"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junit"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:$junit"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:$junit"
 
     //navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
@@ -80,6 +85,7 @@ dependencies {
     implementation "org.koin:koin-core:$koin"
     implementation "org.koin:koin-android:$koin"
     implementation "org.koin:koin-androidx-viewmodel:$koin"
+
 
     //rxjava2
     implementation "io.reactivex.rxjava2:rxandroid:$rxjava2"
